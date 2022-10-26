@@ -3,7 +3,7 @@ package xyz.gdome.fakepaint.model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Square extends Shape {
+public class Circle extends Shape{
 
     private double size;
 
@@ -16,8 +16,8 @@ public class Square extends Shape {
 
 
     @Override
-    public void draw(GraphicsContext gc, Color color, double width) {
-        gc.fillRect(10,10,10, 10);
+    public void draw(GraphicsContext gc, Color color, double radius) {
+
     }
 
     public void run() {
@@ -33,4 +33,5 @@ public class Square extends Shape {
         }
         return false;
     }
+
 }

@@ -4,26 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/HelloApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Position.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" afterDir="false" />
+    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added new classes for shape constructing logic.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isDrawable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isSelectable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +25,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Record" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -66,8 +59,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666709781207</updated>
-      <workItem from="1666709782582" duration="3954000" />
+      <workItem from="1666709782582" duration="16937000" />
     </task>
+    <task id="LOCAL-00001" summary="Added new classes for shape constructing logic.">
+      <created>1666768595132</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666768595132</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -83,5 +84,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added new classes for shape constructing logic." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new classes for shape constructing logic." />
   </component>
 </project>
