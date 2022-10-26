@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added new classes for shape constructing logic.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isDrawable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isSelectable.java" afterDir="false" />
+    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added some stuff...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666709781207</updated>
-      <workItem from="1666709782582" duration="16937000" />
+      <workItem from="1666709782582" duration="17252000" />
     </task>
     <task id="LOCAL-00001" summary="Added new classes for shape constructing logic.">
       <created>1666768595132</created>
@@ -68,7 +59,28 @@
       <option name="project" value="LOCAL" />
       <updated>1666768595132</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added some stuff...">
+      <created>1666798957652</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666798957652</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added some stuff...">
+      <created>1666799056699</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666799056699</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added some stuff...">
+      <created>1666799090701</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666799090701</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,6 +99,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added new classes for shape constructing logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new classes for shape constructing logic." />
+    <MESSAGE value="Added some stuff..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some stuff..." />
   </component>
 </project>
