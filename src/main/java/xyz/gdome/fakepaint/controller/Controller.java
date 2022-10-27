@@ -31,6 +31,13 @@ public ListView<String> messagesListView;
     @FXML
     private void initialize() {
 
+        Model model = new Model();
+
+        gc = context.getGraphicsContext2D();
+        gc.setFill(Color.KHAKI);
+        gc.fillRect(0,0,200,200);
+
+
         // Här kopplar vi ihop view med kontrollern
 
         // Kopplingen till messageProperty i modellen
@@ -64,7 +71,7 @@ public ListView<String> messagesListView;
     private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private void onCanvasClicked() {
+
     }
 }

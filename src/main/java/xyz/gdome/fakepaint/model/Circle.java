@@ -5,18 +5,24 @@ import javafx.scene.paint.Color;
 
 public class Circle extends Shape{
 
-    private double size;
-
-    private double westSide = this.center.x() - (size/2);
-    private double lowerEdge = this.center.y() - (size/2);
-    private double eastSide = this.center.x() + (size/2);
-    private double upperEdge = this.center.x() + (size/2);
+    private double radius;
+    private Color color;
 
 
+
+    public Circle() {
+
+    }
+    public Circle(Color color, double radius, double x, double y) {
+        this.color = color;
+        this.radius = radius;
+        this.insertionCoordinateX = x;
+        this.insertionCoordinateY = y;
+    }
 
 
     @Override
-    public void draw(GraphicsContext gc, Color color, double radius) {
+    public void toDisplay(GraphicsContext gc) {
 
     }
 
@@ -28,10 +34,7 @@ public class Circle extends Shape{
 
     @Override
     public boolean isSelected(double x, double y) {
-        if ((westSide <= x && x <= eastSide) && (lowerEdge <= y && x <= upperEdge)) {
-            return true;
-        }
-        return false;
+        return !(((x - this.center.x()) + (y - this.center.y())) > (radius * radius));
     }
 
 }

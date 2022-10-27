@@ -7,17 +7,23 @@ public class Square extends Shape {
 
     private double size;
 
-    private double westSide = this.center.x() - (size/2);
-    private double lowerEdge = this.center.y() - (size/2);
-    private double eastSide = this.center.x() + (size/2);
-    private double upperEdge = this.center.x() + (size/2);
+    private double westSide = insertionCoordinateX - (size/2);
+    private double lowerEdge = insertionCoordinateY - (size/2);
+    private double eastSide = insertionCoordinateX + (size/2);
+    private double upperEdge = insertionCoordinateY + (size/2);
 
 
 
+    public Square(Color color, double size, double x, double y) {
+        this.size = size;
+        this.color = color;
+        this.insertionCoordinateX = x;
+        this.insertionCoordinateY = y;
+    }
 
     @Override
-    public void draw(GraphicsContext gc, Color color, double width) {
-        gc.fillRect(10,10,10, 10);
+    public void toDisplay(GraphicsContext gc) {
+        gc.fillRect(size,size,this.center.x(),this.center.y());
     }
 
     public void run() {
