@@ -4,19 +4,90 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-padding: 10; -fx-background-color: #A499BE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.gdome.fakepaint.controller.Controller">
-   <center>
-      <Canvas fx:id="context" height="300" onMouseClicked="#onCanvasClicked" width="500" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin></Canvas>
-   </center>
-   <left>
-      <Button fx:id="sendButton" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </left>
-   <top>
-      <ColorPicker fx:id="colorPicker" BorderPane.alignment="CENTER" />
-   </top>
-</BorderPane>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<VBox maxHeight="812.5" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="812.5" prefWidth="500.0" style="-fx-background-color: #E5E7E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.gdome.fakepaint.controller.Controller">
+   <children>
+      <HBox maxHeight="92.5" minHeight="92.5" prefHeight="92.5" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="generateSquareBtn" onAction="#squareBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" text="SQRE" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets bottom="7.25" left="12.5" right="7.25" top="12.5" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="generateRectangleBtn" onAction="#rectangleBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" text="RECT">
+                     <HBox.margin>
+                        <Insets bottom="7.25" left="7.25" right="7.25" top="12.5" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="generateCircleBtn" onAction="#circleBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" text="CIRC">
+                     <HBox.margin>
+                        <Insets bottom="7.25" left="7.25" right="7.25" top="12.5" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="125.0">
+               <children>
+                  <TextField fx:id="dimensionField" maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0" promptText="BxH">
+                     <VBox.margin>
+                        <Insets left="7.25" right="7.25" top="12.5" />
+                     </VBox.margin>
+                  </TextField>
+                  <Slider>
+                     <VBox.margin>
+                        <Insets bottom="12.5" left="7.25" right="7.25" top="25.0" />
+                     </VBox.margin>
+                  </Slider>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <ColorPicker maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0">
+                     <VBox.margin>
+                        <Insets bottom="12.5" left="7.25" right="12.5" top="12.5" />
+                     </VBox.margin>
+                  </ColorPicker>
+                  <HBox prefHeight="66.0" prefWidth="100.0">
+                     <children>
+                        <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="◄">
+                           <HBox.margin>
+                              <Insets left="23.625" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                        <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="►">
+                           <HBox.margin>
+                              <Insets left="3.625" right="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Canvas fx:id="context" height="700.0" width="475.0">
+               <VBox.margin>
+                  <Insets bottom="12.5" left="12.5" right="12.5" top="12.5" />
+               </VBox.margin>
+            </Canvas>
+         </children>
+      </VBox>
+   </children>
+</VBox>

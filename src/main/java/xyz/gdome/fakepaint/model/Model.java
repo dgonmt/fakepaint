@@ -1,30 +1,43 @@
 package xyz.gdome.fakepaint.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FIELDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ArrayList<Shape> toRender;
+    private Shape selectedShape;
     private ShapeFactory shapeFactory;
-
     private ShapeType type;
     private Color color;
     private double radius;
     private double size;
+    private String dimension;
     private double width;
     private double height;
     private double mouseX;
     private double mouseY;
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE FIELDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    private SimpleListProperty<Shape> observableToRender;
+    private SimpleStringProperty observableShapeType;
+    private SimpleDoubleProperty observableRadius;
+    private SimpleDoubleProperty observableSize;
+    private SimpleStringProperty observableDimension;
+    private SimpleDoubleProperty observableWidth;
+    private SimpleDoubleProperty observableHeight;
+    private SimpleDoubleProperty observableMouseX;
+    private SimpleDoubleProperty observableMouseY;
+
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETTER/SETTER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -45,6 +58,9 @@ public class Model {
     }
     public double getSize() {
         return this.size;
+    }
+    public String getDimension() {
+        return this.dimension;
     }
     public double getWidth() {
         return this.width;
@@ -68,8 +84,12 @@ public class Model {
     public void setRadius(double radius) {
         this.radius = radius;
     }
+    //TODO Rewrite this method to parse a string and return a dimension which will be a list of size 2 , if list[0] == null then something is worng, if list[1] == null then it is either a size or a radius.
     public void setSize(double size) {
         this.size = size;
+    }
+    public void setDimension(String dimension) {
+        this.dimension =dimension;
     }
     public void setWidth(double width) {
         this.width = width;
@@ -78,25 +98,121 @@ public class Model {
         this.height = height;
     }
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE GETTERS/SETTERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public String getObservableShapeType() {
+        return observableShapeType.getValue();
+    }
+    public double getObservableRadius() {
+        return observableRadius.getValue();
+    }
+    public double getObservableSize() {
+        return observableSize.getValue();
+    }
+    public String getObservableDimension() {
+        return observableDimension.getValue();
+    }
+    public double getObservableWidth() {
+        return observableWidth.getValue();
+    }
+    public double getObservableHeight() {
+        return observableHeight.getValue();
+    }
+    public double getObservableMouseX() {
+        return observableMouseX.getValue();
+    }
+    public double getObservableMouseY() {
+        return observableMouseY.getValue();
+    }
+
+    public void setObservableShapeType(String shapeType) {
+        this.observableShapeType.set(shapeType);
+    }
+    public void setObservableRadius(double radius) {
+        this.observableRadius.set(radius);
+    }
+    public void setObservableSize(double size) {
+        this.observableSize.set(size);
+    }
+    public void setObservableDimension(String dimenion) {
+        this.observableDimension.set(dimension);
+    }
+    public void setObservableWidth(double width) {
+        this.observableWidth.set(width);
+    }
+    public void setObservableHeight(double height) {
+        this.observableHeight.set(height);
+    }
+    public void setObservableMouseX(double x) {
+        this.observableMouseX.set(x);
+    }
+    public void setObservableMouseY(double y) {
+        this.observableMouseY.set(y);
+    }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE PROPERTIES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    public DoubleProperty radiusProperty() {
+        return observableRadius;
+    }
+    public DoubleProperty sizeProperty() {
+        return observableSize;
+    }
+    public StringProperty dimensionProperty() {
+        return observableDimension;
+    }
+    public DoubleProperty widthProperty() {
+        return observableWidth;
+    }
+    public DoubleProperty heightProperty() {
+        return observableHeight;
+    }
+    public DoubleProperty mouseXProperty() {
+        return observableMouseX;
+    }
+    public DoubleProperty mouseYProperty() {
+        return observableMouseY;
+    }
+
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public Model() {
 
         toRender = new ArrayList<>();
+        shapeFactory = new ShapeFactory();
+
+
+        this.setWidth(120);
+        this.setHeight(120);
+        this.setColor(Color.FIREBRICK);
+        this.setMouseX(0);
+        this.setMouseY(0);
+        toRender.add(newShape(ShapeType.RECTANGLE));
+
+        observableToRender = new SimpleListProperty<>();
+        observableRadius = new SimpleDoubleProperty();
+        observableSize = new SimpleDoubleProperty();
+        observableDimension = new SimpleStringProperty();
+        observableWidth = new SimpleDoubleProperty();
+        observableHeight = new SimpleDoubleProperty();
+        observableMouseX = new SimpleDoubleProperty();
+        observableMouseY = new SimpleDoubleProperty();
+
 
     }
 
+    public Shape newShape(ShapeType shapeType) {
+
+         return shapeFactory.shapeBuilder(shapeType, getColor(), getSize(), getWidth(), getHeight(), getRadius(), getMouseX(), getMouseY());
 
 
-
-
-
-
-
-    public void createNewShape(Enum shapeType) {
-
-        shapeFactory.createShape(shapeType, this.getColor(), this.getSize(), this.getWidth(), this.getHeight(), this.getRadius(), this.getMouseX(), this.getMouseY());
-
+    }
+    private Shape findLatestCreatedShape(ArrayList<Shape> objectsPointedAt) {
+        if (objectsPointedAt.size() == 1) {
+            return objectsPointedAt.get(0);
+        } else {
+            return objectsPointedAt.get(objectsPointedAt.size()-1);
+        }
     }
 
 

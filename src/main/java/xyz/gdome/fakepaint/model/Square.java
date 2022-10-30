@@ -3,40 +3,45 @@ package xyz.gdome.fakepaint.model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Square extends Shape {
+public class Square implements Shape {
 
+    private Color color;
+    private double insertionCoordinateX;
+    private double insertionCoordinateY;
     private double size;
 
-    private double westSide = insertionCoordinateX - (size/2);
-    private double lowerEdge = insertionCoordinateY - (size/2);
-    private double eastSide = insertionCoordinateX + (size/2);
-    private double upperEdge = insertionCoordinateY + (size/2);
 
 
+
+    private final double westSide = insertionCoordinateX - (size/2);
+    private final double lowerEdge = insertionCoordinateY - (size/2);
+    private final double eastSide = insertionCoordinateX + (size/2);
+    private final double upperEdge = insertionCoordinateY + (size/2);
 
     public Square(Color color, double size, double x, double y) {
-        this.size = size;
         this.color = color;
+        this.size = size;
         this.insertionCoordinateX = x;
         this.insertionCoordinateY = y;
+
+    }
+
+
+    public Shape returnShape() {
+        return this;
     }
 
     @Override
     public void toDisplay(GraphicsContext gc) {
-        gc.fillRect(size,size,this.center.x(),this.center.y());
+        gc.setFill(this.color);
+        gc.fillRect(this.insertionCoordinateX,this.insertionCoordinateY,this.size,this.size);
+        gc.setStroke(Color.BLACK);
+        gc.strokeRect(this.insertionCoordinateX,this.insertionCoordinateY,this.size,this.size);
     }
 
-    public void run() {
-
-
-
-    }
 
     @Override
     public boolean isSelected(double x, double y) {
-        if ((westSide <= x && x <= eastSide) && (lowerEdge <= y && x <= upperEdge)) {
-            return true;
-        }
-        return false;
+        return (westSide <= x && x <= eastSide) && (lowerEdge <= y && x <= upperEdge);
     }
 }

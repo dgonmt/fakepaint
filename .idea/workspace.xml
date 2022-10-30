@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added some stuff...">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeFactory.java" afterDir="false" />
+    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added more data-holders and methods operation on the Model-side of the MVC-structure">
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/iShape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/test.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Position.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" afterDir="false" />
     </list>
@@ -25,9 +29,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Record" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -43,14 +48,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -60,7 +66,8 @@
       <option name="presentableId" value="Default" />
       <updated>1666709781207</updated>
       <workItem from="1666709782582" duration="17252000" />
-      <workItem from="1666799645165" duration="17628000" />
+      <workItem from="1666799645165" duration="22726000" />
+      <workItem from="1666893772186" duration="27652000" />
     </task>
     <task id="LOCAL-00001" summary="Added new classes for shape constructing logic.">
       <created>1666768595132</created>
@@ -90,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666799090701</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added more data-holders and methods operation on the Model-side of the MVC-structure">
+      <created>1666887775574</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666887775574</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,6 +124,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added new classes for shape constructing logic." />
     <MESSAGE value="Added some stuff..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some stuff..." />
+    <MESSAGE value="Added more data-holders and methods operation on the Model-side of the MVC-structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added more data-holders and methods operation on the Model-side of the MVC-structure" />
   </component>
 </project>
