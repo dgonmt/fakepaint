@@ -4,13 +4,11 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import xyz.gdome.fakepaint.model.Model;
+import xyz.gdome.fakepaint.model.ShapeFactory;
 import xyz.gdome.fakepaint.model.ShapeType;
 
 import java.util.ArrayList;
@@ -25,6 +23,10 @@ public class Controller {
     private Button generateCircleBtn;
     @FXML
     private TextField dimensionField;
+    @FXML
+    private ColorPicker colorPicker;
+
+
 
     Model model = new Model();
     @FXML
@@ -42,19 +44,15 @@ public class Controller {
     @FXML
     private void initialize() {
 
-        //TODO All the bindings between the GUI controllers and observable properties should be done here.
+        //TODO
+        /**TODO All the bindings between the GUI controllers and observable properties should be done here.
+         * TODO bind the controllers to the highlighted shape
+         */
+
         dimensionField.textProperty().bindBidirectional(model.dimensionProperty());
 
 
-
-        Model model = new Model();
-
         gc = context.getGraphicsContext2D();
-        gc.setFill(Color.KHAKI);
-        gc.fillRect(0, 0, 200, 200);
-        gc.setStroke(Color.BLACK);
-        gc.strokeRect(0,0,200,200);
-
         model.render(gc);
 
 
@@ -91,7 +89,19 @@ public class Controller {
     @FXML
     private void onCanvasClicked(MouseEvent mouseEvent) {
         if (mouseEvent.isControlDown()) {
-            //Select the shape clicked on
+            System.out.println("CNTRL+Click");
+        } else {
+            System.out.println("Click");
+            model.setMouseX(mouseEvent.getSceneX());
+            model.setMouseY(mouseEvent.getSceneY());
+            System.out.println(mouseEvent.getSceneX());
+            System.out.println(mouseEvent.getSceneY());
+
+            model.setWidthAndHeightFromDimension(dimensionField.getText());
+            model.assignShapeToRender(model.newShape());
+            model.render(gc);
+
+
         }
     }
 
@@ -99,12 +109,20 @@ public class Controller {
     private void squareBtn() {
         model.setType(ShapeType.SQUARE);
     }
+
     @FXML
     private void rectangleBtn() {
         model.setType(ShapeType.RECTANGLE);
     }
+
     @FXML
     private void circleBtn() {
         model.setType(ShapeType.CIRCLE);
     }
+
+    @FXML
+    private void selectColor() {
+        model.setColor(colorPicker.getValue());
+    }
+
 }

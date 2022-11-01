@@ -44,4 +44,15 @@ public class Square implements Shape {
     public boolean isSelected(double x, double y) {
         return (westSide <= x && x <= eastSide) && (lowerEdge <= y && x <= upperEdge);
     }
+
+    @Override
+    public String toString() {
+        return "Square{" +
+                "color=" + color +
+                ", insertionCoordinateX=" + insertionCoordinateX +
+                ", insertionCoordinateY=" + insertionCoordinateY +
+                ", size=" + size +
+                '}';
+    }
+
 }

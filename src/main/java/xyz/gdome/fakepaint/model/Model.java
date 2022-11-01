@@ -14,13 +14,12 @@ public class Model {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FIELDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ArrayList<Shape> toRender;
-    private Shape selectedShape;
-    private ShapeFactory shapeFactory;
+    private Shape highlightedShape;
+    private final ShapeFactory shapeFactory;
     private ShapeType type;
     private Color color;
     private double radius;
-    private double size;
-    private String dimension;
+    private double size = 50.0;
     private double width;
     private double height;
     private double mouseX;
@@ -29,7 +28,8 @@ public class Model {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE FIELDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private SimpleListProperty<Shape> observableToRender;
-    private SimpleStringProperty observableShapeType;
+    private SimpleObjectProperty<ShapeType> observableShapeType;
+    private SimpleObjectProperty<Color> observableColor;
     private SimpleDoubleProperty observableRadius;
     private SimpleDoubleProperty observableSize;
     private SimpleStringProperty observableDimension;
@@ -59,9 +59,6 @@ public class Model {
     public double getSize() {
         return this.size;
     }
-    public String getDimension() {
-        return this.dimension;
-    }
     public double getWidth() {
         return this.width;
     }
@@ -88,8 +85,10 @@ public class Model {
     public void setSize(double size) {
         this.size = size;
     }
-    public void setDimension(String dimension) {
-        this.dimension =dimension;
+    public void setWidthAndHeightFromDimension(String dimension) {
+        String[] dimensionArray = dimension.split("x");
+        this.width = Double.parseDouble(dimensionArray[0]);
+        this.height = Double.parseDouble(dimensionArray[1]);
     }
     public void setWidth(double width) {
         this.width = width;
@@ -99,8 +98,11 @@ public class Model {
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE GETTERS/SETTERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public String getObservableShapeType() {
+    public ShapeType getObservableShapeType() {
         return observableShapeType.getValue();
+    }
+    public Color getObservableColor() {
+        return observableColor.getValue();
     }
     public double getObservableRadius() {
         return observableRadius.getValue();
@@ -124,17 +126,17 @@ public class Model {
         return observableMouseY.getValue();
     }
 
-    public void setObservableShapeType(String shapeType) {
+    public void setObservableShapeType(ShapeType shapeType) {
         this.observableShapeType.set(shapeType);
+    }
+    public void setObservableColor(Color color) {
+        this.observableColor.set(color);
     }
     public void setObservableRadius(double radius) {
         this.observableRadius.set(radius);
     }
     public void setObservableSize(double size) {
         this.observableSize.set(size);
-    }
-    public void setObservableDimension(String dimenion) {
-        this.observableDimension.set(dimension);
     }
     public void setObservableWidth(double width) {
         this.observableWidth.set(width);
@@ -151,6 +153,12 @@ public class Model {
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE PROPERTIES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+    public ObjectProperty<ShapeType> shapeTypeProperty() {
+        return observableShapeType;
+    }
+    public ObjectProperty<Color> colorProperty() {
+        return observableColor;
+    }
     public DoubleProperty radiusProperty() {
         return observableRadius;
     }
@@ -181,15 +189,11 @@ public class Model {
         toRender = new ArrayList<>();
         shapeFactory = new ShapeFactory();
 
-
-        this.setWidth(120);
-        this.setHeight(120);
-        this.setColor(Color.FIREBRICK);
-        this.setMouseX(0);
-        this.setMouseY(0);
-        toRender.add(newShape(ShapeType.RECTANGLE));
+        highlightedShape = newDefaultShape();
 
         observableToRender = new SimpleListProperty<>();
+        observableShapeType = new SimpleObjectProperty<>();
+        observableColor = new SimpleObjectProperty<>();
         observableRadius = new SimpleDoubleProperty();
         observableSize = new SimpleDoubleProperty();
         observableDimension = new SimpleStringProperty();
@@ -198,14 +202,24 @@ public class Model {
         observableMouseX = new SimpleDoubleProperty();
         observableMouseY = new SimpleDoubleProperty();
 
+        //this.setWidth(this.parseDimensionToDouble(dimension)[0]);
+        //this.setHeight(this.parseDimensionToDouble(dimension)[1]);
 
     }
 
-    public Shape newShape(ShapeType shapeType) {
+    public Shape newShape() {
 
-         return shapeFactory.shapeBuilder(shapeType, getColor(), getSize(), getWidth(), getHeight(), getRadius(), getMouseX(), getMouseY());
+         return shapeFactory.shapeBuilder(this.getType(), this.getColor(), this.getSize(), this.getWidth(), this.getHeight(), this.getRadius(), this.getMouseX(), this.getMouseY());
 
 
+    }
+    public Shape newDefaultShape() {
+
+        return shapeFactory.shapeBuilder(null,null,0.0,0.0,0.0,0.0,0.0, 0.0);
+
+    }
+    public void highlight(Shape highlightedShape) {
+        this.highlightedShape = highlightedShape;
     }
     private Shape findLatestCreatedShape(ArrayList<Shape> objectsPointedAt) {
         if (objectsPointedAt.size() == 1) {
@@ -213,6 +227,16 @@ public class Model {
         } else {
             return objectsPointedAt.get(objectsPointedAt.size()-1);
         }
+    }
+    private double[] parseDimensionToDouble(String dimension) {
+        String[] splitDimension = dimension.split("x");
+
+        double[] splitDimensionDouble = {Double.parseDouble(splitDimension[0]), Double.parseDouble(splitDimension[1])};
+
+        return splitDimensionDouble;
+    }
+    public void assignShapeToRender(Shape shape) {
+        this.toRender.add(shape);
     }
 
 
@@ -227,9 +251,14 @@ public class Model {
 
 
     public void render(GraphicsContext gc) {
+        System.out.println("Render entered");
+        System.out.println("Nr of objects to render: " + toRender.size());
+
         if(!toRender.isEmpty()) {
             for(Shape shape:toRender) {
                 shape.toDisplay(gc);
+                shape.toString();
+                highlightedShape = toRender.get(toRender.size()-1);
             }
         }
     }

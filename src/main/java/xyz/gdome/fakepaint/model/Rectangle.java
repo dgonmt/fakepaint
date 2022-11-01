@@ -32,6 +32,7 @@ public class Rectangle implements Shape{
 
     @Override
     public void toDisplay(GraphicsContext gc) {
+        System.out.println(this + " should appear on the canvas");
         gc.setFill(this.color);
         gc.fillRect(this.insertionCoordinateX,this.insertionCoordinateY,this.width,this.height);
         gc.setStroke(Color.BLACK);
@@ -44,4 +45,14 @@ public class Rectangle implements Shape{
         return (westSide <= x && x <= eastSide) && (lowerEdge <= y && x <= upperEdge);
     }
 
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "color=" + color +
+                ", insertionCoordinateX=" + insertionCoordinateX +
+                ", insertionCoordinateY=" + insertionCoordinateY +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
 }

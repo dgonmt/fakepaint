@@ -15,15 +15,5 @@ public class ShapeFactory {
         else {
             return new Circle(color, radius, x, y);
         }
-
-//        switch (shapeType) {
-//
-//            case SQUARE ->  new Square(color, size, x, y);
-//            case RECTANGLE -> new Rectangle(color, width, height, x, y);
-//            case CIRCLE -> new Circle(color, radius, x, y);
-//
-//        }
-//        return null;
     }
-
 }

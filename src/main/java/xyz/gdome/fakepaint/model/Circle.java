@@ -49,4 +49,13 @@ public class Circle implements Shape {
         return !(((x - this.insertionCoordinateX) + (y - this.insertionCoordinateY)) > (this.radius * this.radius));
     }
 
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "color=" + color +
+                ", insertionCoordinateX=" + insertionCoordinateX +
+                ", insertionCoordinateY=" + insertionCoordinateY +
+                ", radius=" + radius +
+                '}';
+    }
 }

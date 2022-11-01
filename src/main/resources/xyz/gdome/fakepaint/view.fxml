@@ -51,7 +51,7 @@
             </VBox>
             <VBox>
                <children>
-                  <ColorPicker maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0">
+                  <ColorPicker fx:id="colorPicker" onAction="#selectColor" maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0">
                      <VBox.margin>
                         <Insets bottom="12.5" left="7.25" right="12.5" top="12.5" />
                      </VBox.margin>
@@ -82,7 +82,7 @@
       </HBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Canvas fx:id="context" height="700.0" width="475.0">
+            <Canvas fx:id="context" onMouseClicked="#onCanvasClicked" height="700.0" width="475.0">
                <VBox.margin>
                   <Insets bottom="12.5" left="12.5" right="12.5" top="12.5" />
                </VBox.margin>
