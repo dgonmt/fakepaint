@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array - Done&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when an object in the array have changed&#10;7) Selected shape">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/AbstractShape.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/DefaultShape.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isDisplayable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isSelectable.java" afterDir="false" />
+    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="NEW BRANCH: advancedVersion&#10;&#10;Changed sout from Click to CLICK for on canvas action&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers vid fields - Color Done&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is rerendered.&#10;&#10;6) Rerender when slider - value have changed.&#10;&#10;7) output to file - Done 1/2, rest: add header and footer to output file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,15 +35,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="fakePaintApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="xyz.gdome.fakepaint.fakePaintApplication" />
@@ -144,6 +130,18 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="SHOW_OTHER_BRANCHES" value="true" />
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
