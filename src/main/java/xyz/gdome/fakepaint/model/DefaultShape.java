@@ -29,6 +29,10 @@ public class DefaultShape implements Shape{
 
     }
 
+    public void setSize(double size) {
+
+    }
+
     @Override
     public String toString() {
         return "DefaultShape{EMPTY}";

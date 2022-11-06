@@ -11,6 +11,8 @@ public interface Shape {
 
     public void setColor(Color color);
 
+    public void setSize(double size);
+
     public String toSvg();
 
     public Shape returnShape();

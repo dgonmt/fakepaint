@@ -30,6 +30,10 @@ public class Rectangle implements Shape{
         this.color = color;
     }
 
+    public void setSize(double size) {
+
+    }
+
     @Override
     public void toDisplay(GraphicsContext gc) {
         System.out.println(this + " should appear on the canvas");

@@ -78,12 +78,25 @@ public class Controller {
 
         colorPicker.valueProperty().addListener((observableValue, color, t1) -> {
             try {
+
                 model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
                 model.render(context);
             } catch (Exception e) {
                 System.out.println("Nothing to change");
             }
         });
+
+        sizeSlider.valueProperty().bindBidirectional(model.sizeProperty());
+
+        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                model.clearCanvas(canvas);
+                model.getToRender().get(model.indexOfHighlightedShape).setSize(model.getObservableSize());
+                model.render(context);
+            }
+        });
+
 
 
 
@@ -130,6 +143,8 @@ public class Controller {
             model.setMouseY(mouseEvent.getY());
             model.selector(mouseEvent.getX(), mouseEvent.getY());
 
+            System.out.println(model.indexOfHighlightedShape);
+
 //            System.out.println("Mouse X: " + mouseEvent.getX());
 //            System.out.println("Mouse Y: " + mouseEvent.getY());
 
@@ -146,6 +161,8 @@ public class Controller {
             model.setWidthAndHeightFromDimension(dimensionField.getText());
             model.assignShapeToRender(model.newShape());
             model.render(context);
+
+            System.out.println(model.indexOfHighlightedShape);
 
             System.out.println("Mouse X: " + mouseEvent.getX());
             System.out.println("Mouse Y: " + mouseEvent.getY());

@@ -241,10 +241,15 @@ public class Model {
 //    }
     private void highlight(Shape highlightedShape) {
         this.highlightedShape = highlightedShape;
+        indexOfHighlightedShape = toRender.size()-1;
     }
     public void assignShapeToRender(Shape shape) {
-        this.toRender.add(shape);
-        highlight(shape);
+
+        if (!shape.getClass().getSimpleName().equals("DefaultShape")) {
+            this.toRender.add(shape);
+            highlight(shape);
+        }
+
     }
     public void render(GraphicsContext gc) {
 

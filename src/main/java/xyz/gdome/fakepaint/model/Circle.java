@@ -25,6 +25,9 @@ public class Circle implements Shape {
     public void setColor(Color color) {
         this.color = color;
     }
+    public void setSize(double size) {
+        this.radius = size;
+    }
     public Shape returnShape() {
         return this;
     }
