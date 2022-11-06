@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when a an object in the array have changed">
+    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array - Done&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when an object in the array have changed&#10;7) Selected shape">
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/AbstractShape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/DefaultShape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isDisplayable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/isSelectable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Shape.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/ShapeType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" afterDir="false" />
     </list>
@@ -24,9 +31,9 @@
       <list>
         <option value="Record" />
         <option value="Enum" />
-        <option value="Class" />
-        <option value="Interface" />
         <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -48,9 +55,29 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "inlay.hints"
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="fakePaintApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="xyz.gdome.fakepaint.fakePaintApplication" />
+      <module name="fakepaint" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="xyz.gdome.fakepaint.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.fakePaintApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,7 +88,7 @@
       <updated>1666709781207</updated>
       <workItem from="1666709782582" duration="17252000" />
       <workItem from="1666799645165" duration="22726000" />
-      <workItem from="1666893772186" duration="53586000" />
+      <workItem from="1666893772186" duration="115039000" />
     </task>
     <task id="LOCAL-00001" summary="Added new classes for shape constructing logic.">
       <created>1666768595132</created>
@@ -105,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667122621397</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array - Done&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when an object in the array have changed&#10;7) Selected shape">
+      <created>1667290031007</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667290031007</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +161,11 @@
     <MESSAGE value="Added some stuff..." />
     <MESSAGE value="Added more data-holders and methods operation on the Model-side of the MVC-structure" />
     <MESSAGE value="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when a an object in the array have changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when a an object in the array have changed" />
+    <MESSAGE value="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array - Done&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when an object in the array have changed&#10;7) Selected shape" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array - Done&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when an object in the array have changed&#10;7) Selected shape" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

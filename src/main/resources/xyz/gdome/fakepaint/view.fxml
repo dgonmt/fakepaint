@@ -10,25 +10,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.MenuItem?>
 <VBox maxHeight="812.5" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="812.5" prefWidth="500.0" style="-fx-background-color: #E5E7E9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.gdome.fakepaint.controller.Controller">
    <children>
       <HBox maxHeight="92.5" minHeight="92.5" prefHeight="92.5" prefWidth="600.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="generateSquareBtn" onAction="#squareBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" text="SQRE" textAlignment="CENTER">
+                  <Button fx:id="generateSquareBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#squareBtn" prefHeight="75.0" prefWidth="75.0" text="SQRE" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets bottom="7.25" left="12.5" right="7.25" top="12.5" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="generateRectangleBtn" onAction="#rectangleBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" text="RECT">
+                  <Button fx:id="generateRectangleBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#rectangleBtn" prefHeight="75.0" prefWidth="75.0" text="RECT">
                      <HBox.margin>
                         <Insets bottom="7.25" left="7.25" right="7.25" top="12.5" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="generateCircleBtn" onAction="#circleBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" text="CIRC">
+                  <Button fx:id="generateCircleBtn" maxHeight="75.0" maxWidth="75.0" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#circleBtn" prefHeight="75.0" prefWidth="75.0" text="CIRC">
                      <HBox.margin>
                         <Insets bottom="7.25" left="7.25" right="7.25" top="12.5" />
                      </HBox.margin>
@@ -42,34 +40,39 @@
                         <Insets left="7.25" right="7.25" top="12.5" />
                      </VBox.margin>
                   </TextField>
-                  <Slider>
+                  <Slider fx:id="sizeSlider" blockIncrement="0.0" majorTickUnit="100.0" max="300.0" minorTickCount="10" showTickLabels="true" showTickMarks="true">
                      <VBox.margin>
-                        <Insets bottom="12.5" left="7.25" right="7.25" top="25.0" />
+                        <Insets bottom="12.5" left="7.25" right="7.25" top="12.5" />
                      </VBox.margin>
                   </Slider>
                </children>
             </VBox>
             <VBox>
                <children>
-                  <ColorPicker fx:id="colorPicker" onAction="#selectColor" maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0">
+                  <ColorPicker fx:id="colorPicker" maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" onAction="#selectColor" prefHeight="25.0" prefWidth="100.0">
                      <VBox.margin>
-                        <Insets bottom="12.5" left="7.25" right="12.5" top="12.5" />
+                        <Insets bottom="5.0" left="7.25" right="12.5" top="12.5" />
                      </VBox.margin>
                   </ColorPicker>
                   <HBox prefHeight="66.0" prefWidth="100.0">
                      <children>
-                        <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="◄">
+                        <Button fx:id="undoBtn" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#undo" prefHeight="30.0" prefWidth="30.0" text="◄">
                            <HBox.margin>
-                              <Insets left="23.625" />
+                              <Insets left="7.5" right="3.625" />
                            </HBox.margin>
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Button>
-                        <Button maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="►">
+                        <Button fx:id="redoBtn" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#redo" prefHeight="30.0" prefWidth="30.0" text="►">
                            <HBox.margin>
-                              <Insets left="3.625" right="20.0" />
+                              <Insets right="3.625" />
                            </HBox.margin>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="saveBtn" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#saveToFile" prefHeight="30.0" prefWidth="30.0" text="S">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -82,7 +85,7 @@
       </HBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Canvas fx:id="context" onMouseClicked="#onCanvasClicked" height="700.0" width="475.0">
+            <Canvas fx:id="canvas" height="700.0" onMouseClicked="#onCanvasClicked" width="475.0">
                <VBox.margin>
                   <Insets bottom="12.5" left="12.5" right="12.5" top="12.5" />
                </VBox.margin>

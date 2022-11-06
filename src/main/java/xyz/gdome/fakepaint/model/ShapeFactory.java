@@ -4,7 +4,8 @@ import javafx.scene.paint.Color;
 
 public class ShapeFactory {
 
-    public Shape shapeBuilder(ShapeType shapeType, Color color, double size, double width, double height, double radius, double x, double y) {
+    //Abstract factory pattern
+    public Shape shapeBuilder(ShapeType shapeType, Color color, double size, double width, double height, double x, double y) {
 
         if (shapeType == ShapeType.SQUARE) {
             return new Square(color, size, x, y);
@@ -12,8 +13,10 @@ public class ShapeFactory {
         if (shapeType == ShapeType.RECTANGLE) {
             return new Rectangle(color, width, height, x, y);
         }
-        else {
-            return new Circle(color, radius, x, y);
+        if (shapeType == ShapeType.CIRCLE) {
+            return new Circle(color, size, x, y);
+        } else {
+            return new DefaultShape();
         }
     }
 }

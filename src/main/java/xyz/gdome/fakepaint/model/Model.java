@@ -6,6 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +18,14 @@ public class Model {
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FIELDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    ArrayList<Shape> toRender;
+    private List<Shape> toRender;
+    private List<Shape> toStore;
     private Shape highlightedShape;
+    public int indexOfHighlightedShape;
     private final ShapeFactory shapeFactory;
     private ShapeType type;
-    private Color color;
-    private double radius;
-    private double size = 50.0;
+    //private Color color;
+    private double size;
     private double width;
     private double height;
     private double mouseX;
@@ -28,6 +34,7 @@ public class Model {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE FIELDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private SimpleListProperty<Shape> observableToRender;
+    private ObservableList<Shape> observableList = FXCollections.observableArrayList();
     private SimpleObjectProperty<ShapeType> observableShapeType;
     private SimpleObjectProperty<Color> observableColor;
     private SimpleDoubleProperty observableRadius;
@@ -50,12 +57,9 @@ public class Model {
     public ShapeType getType() {
         return this.type;
     }
-    public Color getColor() {
-        return this.color;
-    }
-    public double getRadius() {
-        return this.radius;
-    }
+//    public Color getColor() {
+//        return this.color;
+//    }
     public double getSize() {
         return this.size;
     }
@@ -64,6 +68,12 @@ public class Model {
     }
     public double getHeight() {
         return this.height;
+    }
+    public Shape getHighlightedShape() {
+        return this.highlightedShape;
+    }
+    public List<Shape> getToRender() {
+        return this.toRender;
     }
 
     public void setMouseX(double x) {
@@ -75,20 +85,21 @@ public class Model {
     public void setType(ShapeType type) {
         this.type = type;
     }
-    public void setColor(Color color) {
-        this.color = color;
-    }
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
+//    public void setColor(Color color) {
+//        this.color = color;
+//    }
     //TODO Rewrite this method to parse a string and return a dimension which will be a list of size 2 , if list[0] == null then something is worng, if list[1] == null then it is either a size or a radius.
     public void setSize(double size) {
         this.size = size;
     }
     public void setWidthAndHeightFromDimension(String dimension) {
-        String[] dimensionArray = dimension.split("x");
-        this.width = Double.parseDouble(dimensionArray[0]);
-        this.height = Double.parseDouble(dimensionArray[1]);
+        try {
+            String[] dimensionArray = dimension.split("x");
+            this.width = Double.parseDouble(dimensionArray[0]);
+            this.height = Double.parseDouble(dimensionArray[1]);
+        } catch (Exception e) {
+            System.out.println("Dimension field is empty");
+        }
     }
     public void setWidth(double width) {
         this.width = width;
@@ -98,11 +109,14 @@ public class Model {
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OBSERVABLE GETTERS/SETTERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public ObservableList<Shape> getObservableList() {
+        return observableList;
+    }
     public ShapeType getObservableShapeType() {
         return observableShapeType.getValue();
     }
     public Color getObservableColor() {
-        return observableColor.getValue();
+        return observableColor.get();
     }
     public double getObservableRadius() {
         return observableRadius.getValue();
@@ -125,6 +139,9 @@ public class Model {
     public double getObservableMouseY() {
         return observableMouseY.getValue();
     }
+
+
+
 
     public void setObservableShapeType(ShapeType shapeType) {
         this.observableShapeType.set(shapeType);
@@ -187,88 +204,126 @@ public class Model {
     public Model() {
 
         toRender = new ArrayList<>();
+        toStore = new ArrayList<>();
         shapeFactory = new ShapeFactory();
 
-        highlightedShape = newDefaultShape();
+        ObservableList<Shape> observableList = FXCollections.observableList(toRender);
+
+        Shape defaultShape = shapeFactory.shapeBuilder(null,null,0.0,0.0,0.0,0.0,0.0);
+        highlight(defaultShape);
 
         observableToRender = new SimpleListProperty<>();
         observableShapeType = new SimpleObjectProperty<>();
-        observableColor = new SimpleObjectProperty<>();
+        observableColor = new SimpleObjectProperty<>(Color.RED);
         observableRadius = new SimpleDoubleProperty();
         observableSize = new SimpleDoubleProperty();
-        observableDimension = new SimpleStringProperty();
+        observableDimension = new SimpleStringProperty("125x25");
         observableWidth = new SimpleDoubleProperty();
         observableHeight = new SimpleDoubleProperty();
         observableMouseX = new SimpleDoubleProperty();
         observableMouseY = new SimpleDoubleProperty();
 
-        //this.setWidth(this.parseDimensionToDouble(dimension)[0]);
-        //this.setHeight(this.parseDimensionToDouble(dimension)[1]);
 
     }
 
     public Shape newShape() {
 
-         return shapeFactory.shapeBuilder(this.getType(), this.getColor(), this.getSize(), this.getWidth(), this.getHeight(), this.getRadius(), this.getMouseX(), this.getMouseY());
+         return shapeFactory.shapeBuilder(this.getType(), this.getObservableColor(), this.getSize(), this.getWidth(), this.getHeight(), this.getMouseX(), this.getMouseY());
 
 
     }
-    public Shape newDefaultShape() {
 
-        return shapeFactory.shapeBuilder(null,null,0.0,0.0,0.0,0.0,0.0, 0.0);
 
-    }
-    public void highlight(Shape highlightedShape) {
+//    public Shape newDefaultShape() {
+//
+//        return shapeFactory.shapeBuilder(null,null,0.0,0.0,0.0,0.0,0.0);
+//
+//    }
+    private void highlight(Shape highlightedShape) {
         this.highlightedShape = highlightedShape;
-    }
-    private Shape findLatestCreatedShape(ArrayList<Shape> objectsPointedAt) {
-        if (objectsPointedAt.size() == 1) {
-            return objectsPointedAt.get(0);
-        } else {
-            return objectsPointedAt.get(objectsPointedAt.size()-1);
-        }
-    }
-    private double[] parseDimensionToDouble(String dimension) {
-        String[] splitDimension = dimension.split("x");
-
-        double[] splitDimensionDouble = {Double.parseDouble(splitDimension[0]), Double.parseDouble(splitDimension[1])};
-
-        return splitDimensionDouble;
     }
     public void assignShapeToRender(Shape shape) {
         this.toRender.add(shape);
+        highlight(shape);
     }
-
-
-
-
-
-
-
-
-
-
-
-
     public void render(GraphicsContext gc) {
-        System.out.println("Render entered");
+
         System.out.println("Nr of objects to render: " + toRender.size());
 
         if(!toRender.isEmpty()) {
+
             for(Shape shape:toRender) {
+
                 shape.toDisplay(gc);
-                shape.toString();
-                highlightedShape = toRender.get(toRender.size()-1);
+                System.out.println(shape.toSvg());
+
             }
+
+            //highlight(toRender.get(toRender.size()-1));
         }
+        System.out.println(highlightedShape + " is highlighted");
     }
+    public void selector(double mouseClickX, double mouseClickY) {
+
+        System.out.println("Nr of objects to render: " + toRender.size());
+
+        List<Shape> tempList = new ArrayList<>();
+        int tempIndex = 0;
+
+        if(!toRender.isEmpty()) {
+
+            for(int i = 0; i < toRender.size(); i++) {
+                if (toRender.get(i).isSelected(mouseClickX, mouseClickY)) {
+
+                    tempList.add(toRender.get(i));
+                    tempIndex = i;
+
+                }
+            }
+
+            if (!tempList.isEmpty()) {
+                highlight(tempList.get(tempList.size()-1));
+                System.out.println(highlightedShape + "is selected");
+            }
+            }
+
+        indexOfHighlightedShape = tempIndex;
+
+        }
     public void undo() {
         if(!toRender.isEmpty()) {
+            toStore.add(toRender.get(toRender.size()-1));
             toRender.remove(toRender.size()-1);
+        }
+    }
+    public void redo() {
+        if (!toStore.isEmpty()) {
+            toRender.add(toStore.get(toStore.size()-1));
+            toStore.remove(toStore.size()-1);
         }
     }
     public void clearCanvas(Canvas context) {
         context.getGraphicsContext2D().clearRect(0, 0, context.getWidth(), context.getHeight());
+    }
+    public void saveToFile(Path file) {
+        StringBuffer outPut = new StringBuffer();
+
+//        for (int i = 1; i < toRender.size(); i++) {
+//            outPut.append(toRender.get(i).toSvg());
+//            outPut.append("\n");
+//        }
+
+        for (Shape shape:toRender) {
+            outPut.append(shape.toSvg());
+            outPut.append("\n");
+        }
+
+        try {
+            Files.writeString(file, outPut.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 
@@ -279,15 +334,34 @@ public class Model {
     //private createShape(double mouseX, double mouseY, Color color, double radius) {}
 
 
+    //#####################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Magisk klass som uppdateras så fort view uppdateras
     StringProperty message = new SimpleStringProperty();
 
-    public ObservableList<String> getObservableList() {
-        return observableList;
-    }
+
 
     // En observerbar lista
-    ObservableList<String> observableList = FXCollections.observableArrayList();
+
 
     public String getMessage() {
         return message.get();
@@ -302,13 +376,13 @@ public class Model {
     }
 
 
-    public void sendMessage() {
-        getObservableList().add(getMessage());
-        setMessage("");
-    }
+//    public void sendMessage() {
+//        getObservableList().add(getMessage());
+//        setMessage("");
+//    }
 
 
-    //#####################################################################################################################
+
 
 
 

@@ -1,16 +1,22 @@
 package xyz.gdome.fakepaint.controller;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import xyz.gdome.fakepaint.model.Model;
 import xyz.gdome.fakepaint.model.ShapeFactory;
 import xyz.gdome.fakepaint.model.ShapeType;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Controller {
@@ -22,19 +28,28 @@ public class Controller {
     @FXML
     private Button generateCircleBtn;
     @FXML
+    private Button undoBtn;
+    @FXML
+    private Button redoBtn;
+    @FXML
+    private Button saveBtn;
+    @FXML
     private TextField dimensionField;
     @FXML
     private ColorPicker colorPicker;
-
+    @FXML
+    private Slider sizeSlider;
 
 
     Model model = new Model();
     @FXML
-    private Canvas context;
+    private Canvas canvas;
     @FXML
-    private GraphicsContext gc;
+    private GraphicsContext context;
+    public Stage stage;
 
     public ListView<String> messagesListView;
+
 
 
     public TextField messageField;
@@ -49,11 +64,32 @@ public class Controller {
          * TODO bind the controllers to the highlighted shape
          */
 
+        context = canvas.getGraphicsContext2D();
+        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                model.setSize(sizeSlider.getValue());
+            }
+        });
         dimensionField.textProperty().bindBidirectional(model.dimensionProperty());
 
 
-        gc = context.getGraphicsContext2D();
-        model.render(gc);
+        colorPicker.valueProperty().bindBidirectional(model.colorProperty());
+
+        colorPicker.valueProperty().addListener((observableValue, color, t1) -> {
+            try {
+                model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
+                model.render(context);
+            } catch (Exception e) {
+                System.out.println("Nothing to change");
+            }
+        });
+
+
+
+
+
+        model.render(context);
 
 
         // Här kopplar vi ihop view med kontrollern
@@ -69,37 +105,51 @@ public class Controller {
 //
 //        sendButton.disabledProperty().bind(model.messageProperty().isEmpty());
 //
-//        gc = context.getGraphicsContext2D();
+//        context = canvas.getGraphicsContext2D();
 
 
     }
 
-    public void sendMessageClicked() {
-        //Handle button action
+//    public void sendMessageClicked() {
+//        //Handle button action
+//
+//        //
+//        model.sendMessage();
+//
+//    }
 
-        //
-        model.sendMessage();
 
-    }
 
-    @FXML
-    private Label welcomeText;
-
-    //TODO Implement functionality so that if a shape is selected make it listen for new data until regular onClick on canvas
     @FXML
     private void onCanvasClicked(MouseEvent mouseEvent) {
         if (mouseEvent.isControlDown()) {
+
             System.out.println("CNTRL+Click");
+
+            model.setMouseX(mouseEvent.getX());
+            model.setMouseY(mouseEvent.getY());
+            model.selector(mouseEvent.getX(), mouseEvent.getY());
+
+//            System.out.println("Mouse X: " + mouseEvent.getX());
+//            System.out.println("Mouse Y: " + mouseEvent.getY());
+
+
+
+
+
         } else {
+
             System.out.println("Click");
-            model.setMouseX(mouseEvent.getSceneX());
-            model.setMouseY(mouseEvent.getSceneY());
-            System.out.println(mouseEvent.getSceneX());
-            System.out.println(mouseEvent.getSceneY());
+            model.setMouseX(mouseEvent.getX());
+            model.setMouseY(mouseEvent.getY());
 
             model.setWidthAndHeightFromDimension(dimensionField.getText());
             model.assignShapeToRender(model.newShape());
-            model.render(gc);
+            model.render(context);
+
+            System.out.println("Mouse X: " + mouseEvent.getX());
+            System.out.println("Mouse Y: " + mouseEvent.getY());
+
 
 
         }
@@ -121,8 +171,44 @@ public class Controller {
     }
 
     @FXML
-    private void selectColor() {
-        model.setColor(colorPicker.getValue());
+    private void undo() {
+        model.undo();
+        model.clearCanvas(canvas);
+        model.render(context);
     }
+    @FXML
+    private void redo() {
+        model.redo();
+        model.clearCanvas(canvas);
+        model.render(context);
+    }
+
+    @FXML
+    private void selectColor() {
+        //model.setColor(colorPicker.getValue());
+        //model.renderSelected(context);
+    }
+    @FXML
+    private void saveToFile(ActionEvent actionEvent) {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save as");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().clear();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
+
+        File filePath = fileChooser.showSaveDialog(stage);
+
+        if (filePath != null) {
+            model.saveToFile(filePath.toPath());
+        }
+
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+
 
 }

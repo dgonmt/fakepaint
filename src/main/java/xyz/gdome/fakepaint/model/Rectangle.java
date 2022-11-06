@@ -6,23 +6,19 @@ import javafx.scene.paint.Color;
 public class Rectangle implements Shape{
 
     private Color color;
-    private double insertionCoordinateX;
-    private double insertionCoordinateY;
+    private double centerX;
+    private double centerY;
     private double width;
     private double height;
 
 
-    private final double westSide = insertionCoordinateX - (width/2);
-    private final double lowerEdge = insertionCoordinateY - (height/2);
-    private final double eastSide = insertionCoordinateX + (width/2);
-    private final double upperEdge = insertionCoordinateY + (height/2);
 
     public Rectangle(Color color, double width, double height, double x, double y) {
         this.color = color;
         this.width = width;
         this.height = height;
-        this.insertionCoordinateX = x;
-        this.insertionCoordinateY = y;
+        this.centerX = x;
+        this.centerY = y;
 
     }
 
@@ -30,27 +26,41 @@ public class Rectangle implements Shape{
         return this;
     }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     @Override
     public void toDisplay(GraphicsContext gc) {
         System.out.println(this + " should appear on the canvas");
         gc.setFill(this.color);
-        gc.fillRect(this.insertionCoordinateX,this.insertionCoordinateY,this.width,this.height);
+        gc.fillRect(this.centerX - width/2,this.centerY - height/2,this.width,this.height);
         gc.setStroke(Color.BLACK);
-        gc.strokeRect(this.insertionCoordinateX,this.insertionCoordinateY,this.width,this.height);
+        gc.strokeRect(this.centerX - width/2,this.centerY - height/2,this.width,this.height);
     }
 
 
     @Override
     public boolean isSelected(double x, double y) {
-        return (westSide <= x && x <= eastSide) && (lowerEdge <= y && x <= upperEdge);
+        System.out.println("isSelected is checking a rectangle");
+        double westSide = centerX - (width/2);
+        double lowerEdge = centerY - (height/2);
+        double eastSide = centerX + (width/2);
+        double upperEdge = centerY + (height/2);
+
+        return (westSide <= x && x <= eastSide) && (lowerEdge <= y && y <= upperEdge);
+    }
+    @Override
+    public String toSvg() {
+        return "<rect x=\"" + this.centerX + "\" y=\"" + this.centerY + "\" width=\"" + this.width + "\" height=\"" + this.height + "\" fill=\"" + this.color + "\"/>";
     }
 
     @Override
     public String toString() {
         return "Rectangle{" +
                 "color=" + color +
-                ", insertionCoordinateX=" + insertionCoordinateX +
-                ", insertionCoordinateY=" + insertionCoordinateY +
+                ", centerX=" + centerX +
+                ", centerY=" + centerY +
                 ", width=" + width +
                 ", height=" + height +
                 '}';
