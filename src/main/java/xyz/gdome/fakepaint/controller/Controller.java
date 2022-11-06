@@ -139,7 +139,7 @@ public class Controller {
 
         } else {
 
-            System.out.println("Click");
+            System.out.println("CLICK");
             model.setMouseX(mouseEvent.getX());
             model.setMouseY(mouseEvent.getY());
 
