@@ -29,6 +29,9 @@ public class Rectangle implements Shape{
     public void setColor(Color color) {
         this.color = color;
     }
+    public Color getColor() {
+        return this.color;
+    }
 
     public void setSize(double size) {
 
@@ -56,7 +59,10 @@ public class Rectangle implements Shape{
     }
     @Override
     public String toSvg() {
-        return "<rect x=\"" + this.centerX + "\" y=\"" + this.centerY + "\" width=\"" + this.width + "\" height=\"" + this.height + "\" fill=\"" + this.color + "\"/>";
+
+        String color= "#"+this.getColor().toString().substring(2,10);
+
+        return "<rect x=\"" + this.centerX + "\" y=\"" + this.centerY + "\" width=\"" + this.width + "\" height=\"" + this.height + "\" fill=\"" + color + "\"/>";
     }
 
     @Override

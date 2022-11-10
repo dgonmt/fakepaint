@@ -30,6 +30,9 @@ public class Square implements Shape {
     public void setSize(double size) {
         this.size = size;
     }
+    public Color getColor() {
+        return this.color;
+    }
 
     @Override
     public void toDisplay(GraphicsContext gc) {
@@ -58,7 +61,10 @@ public class Square implements Shape {
 
     @Override
     public String toSvg() {
-        return "<rect x=\"" + this.centerX + "\" y=\"" + this.centerY + "\" width=\"" + this.size + "\" height=\"" + this.size + "\" fill=\"" + this.color + "\"/>";
+
+        String color= "#"+this.getColor().toString().substring(2,10);
+
+        return "<rect x=\"" + this.centerX + "\" y=\"" + this.centerY + "\" width=\"" + this.size + "\" height=\"" + this.size + "\" fill=\"" + color + "\"/>";
     }
 
     @Override

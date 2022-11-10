@@ -28,6 +28,9 @@ public class Circle implements Shape {
     public void setSize(double size) {
         this.radius = size;
     }
+    public Color getColor() {
+        return this.color;
+    }
     public Shape returnShape() {
         return this;
     }
@@ -50,7 +53,10 @@ public class Circle implements Shape {
     }
     @Override
     public String toSvg() {
-        return "<circle cx=\"" + this.centerX + "\" cy=\"" + this.centerY + "\" r=\"" + this.radius + "\" fill=\"" + this.color + "\"/>";
+
+        String color= "#"+this.getColor().toString().substring(2,10);
+
+        return "<circle cx=\"" + this.centerX + "\" cy=\"" + this.centerY + "\" r=\"" + this.radius / 2  + "\" fill=\"" + color + "\"/>";
     }
 
     @Override

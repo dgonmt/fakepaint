@@ -16,7 +16,7 @@ public class fakePaintApplication extends javafx.application.Application {
         Controller controller = fxmlLoader.getController();
         controller.setStage(stage);
 
-        stage.setTitle("dumbPaint");
+        stage.setTitle("Paintish");
         stage.setScene(scene);
         stage.show();
     }

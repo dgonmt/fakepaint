@@ -7,7 +7,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -232,8 +231,6 @@ public class Model {
 
 
     }
-
-
 //    public Shape newDefaultShape() {
 //
 //        return shapeFactory.shapeBuilder(null,null,0.0,0.0,0.0,0.0,0.0);
@@ -310,18 +307,19 @@ public class Model {
     public void clearCanvas(Canvas context) {
         context.getGraphicsContext2D().clearRect(0, 0, context.getWidth(), context.getHeight());
     }
-    public void saveToFile(Path file) {
+    public void saveToSVG(Path file) {
         StringBuffer outPut = new StringBuffer();
 
-//        for (int i = 1; i < toRender.size(); i++) {
-//            outPut.append(toRender.get(i).toSvg());
-//            outPut.append("\n");
-//        }
+        outPut.append("<svg version=\"1.1\"\n" +
+                "     width=\"700\" height=\"475\"\n" +
+                "     xmlns=\"http://www.w3.org/2000/svg\">");
 
         for (Shape shape:toRender) {
             outPut.append(shape.toSvg());
             outPut.append("\n");
         }
+        outPut.append("\n" +
+                "</svg>");
 
         try {
             Files.writeString(file, outPut.toString());
