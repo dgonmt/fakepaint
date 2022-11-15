@@ -3,6 +3,8 @@ package xyz.gdome.fakepaint.model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 public class Circle implements Shape {
 
     private Color color;
@@ -57,6 +59,19 @@ public class Circle implements Shape {
         String color= "#"+this.getColor().toString().substring(2,10);
 
         return "<circle cx=\"" + this.centerX + "\" cy=\"" + this.centerY + "\" r=\"" + this.radius / 2  + "\" fill=\"" + color + "\"/>";
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Circle circle)) return false;
+        return Double.compare(circle.centerX, centerX) == 0 && Double.compare(circle.centerY, centerY) == 0 && Double.compare(circle.radius, radius) == 0 && Objects.equals(color, circle.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, centerX, centerY, radius);
     }
 
     @Override

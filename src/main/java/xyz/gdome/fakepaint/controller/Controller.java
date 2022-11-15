@@ -48,34 +48,44 @@ public class Controller {
     private void initialize() {
 
         context = canvas.getGraphicsContext2D();
-
+//        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+//                model.setSize(sizeSlider.getValue());
+//            }
+//        });
         dimensionField.textProperty().bindBidirectional(model.dimensionProperty());
+
+
         colorPicker.valueProperty().bindBidirectional(model.colorProperty());
         sizeSlider.valueProperty().bindBidirectional(model.sizeProperty());
 
 
-        colorPicker.valueProperty().addListener((observableValue, color, t1) -> {
-            try {
-                model.clearCanvas(canvas);
-                model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
-                model.render(context);
-            } catch (Exception e) {
-                System.out.println("Nothing to change");
-            }
-        });
-        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                try {
-                    model.clearCanvas(canvas);
-                    model.getToRender().get(model.indexOfHighlightedShape).setSize(model.getObservableSize());
-                    model.render(context);
-                } catch (Exception e) {
-                    System.out.println("Nothing to change");
-                }
+//        colorPicker.valueProperty().addListener((observableValue, color, t1) -> {
+//            try {
+//                model.clearCanvas(canvas);
+//                model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
+//                model.render(context);
+//            } catch (Exception e) {
+//                System.out.println("Nothing to change");
+//            }
+//        });
 
-            }
-        });
+
+
+//        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+//                try {
+//                    model.clearCanvas(canvas);
+//                    model.getToRender().get(model.indexOfHighlightedShape).setSize(model.getObservableSize());
+//                    model.render(context);
+//                } catch (Exception e) {
+//                    System.out.println("Nothing to change");
+//                }
+//
+//            }
+//        });
 
         //model.render(context);
     }
@@ -148,9 +158,24 @@ public class Controller {
     }
 
     @FXML
-    private void selectColor() {
-        //model.setColor(colorPicker.getValue());
-        //model.renderSelected(context);
+    private void colorValueChange() {
+            try {
+                model.clearCanvas(canvas);
+                model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
+                model.render(context);
+            } catch (Exception e) {
+                System.out.println("Nothing to change");
+            }
+    }
+    @FXML
+    private void sizeValueChange() {
+        try {
+            model.clearCanvas(canvas);
+            model.getToRender().get(model.indexOfHighlightedShape).setSize(model.getObservableSize());
+            model.render(context);
+        } catch (Exception e) {
+            System.out.println("Nothing to change");
+        }
     }
     @FXML
     private void saveToFile(ActionEvent actionEvent) {
@@ -170,6 +195,7 @@ public class Controller {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 
 
 

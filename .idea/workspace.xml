@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="NEW BRANCH: Version 2.0&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers with fields - Done: Color and Size&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is re-rendered.&#10;&#10;6) Re-render when slider - value have changed.&#10;&#10;7) output to file - 1/2 Done, TODO: add header and footer to output file">
+    <list default="true" id="7c9ed6b9-724a-4d2c-a1d3-cd11f27bd617" name="Changes" comment="NEW BRANCH: Version 2.0&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers with fields - Done: Color and Size&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone. Command pattern is not implemented..&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is re-rendered.&#10;&#10;6) Re-render when slider - value have changed. - Done&#10;&#10;7) output to file - Done">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/test.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/xyz/gdome/fakepaint/model/ModelTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/fakePaintApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/paintIsh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Circle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/gdome/fakepaint/model/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/test.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/xyz/gdome/fakepaint/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,7 @@
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -48,19 +50,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "create.test.in.the.same.root": "true",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
-  <component name="RunManager">
-    <configuration name="fakePaintApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="xyz.gdome.fakepaint.fakePaintApplication" />
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="xyz.gdome.fakepaint.model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.paintIsh">
+    <configuration name="paintIsh" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="xyz.gdome.fakepaint.paintIsh" />
       <module name="fakepaint" />
       <extension name="coverage">
         <pattern>
@@ -72,9 +87,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ModelTest.assignShapeToRenderAddsNewShapeToToRenderList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fakepaint" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="xyz.gdome.fakepaint.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="xyz.gdome.fakepaint.model" />
+      <option name="MAIN_CLASS_NAME" value="xyz.gdome.fakepaint.model.ModelTest" />
+      <option name="METHOD_NAME" value="assignShapeToRenderAddsNewShapeToToRenderList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelTest.createNewShapeAddsNewShapeToToRenderList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fakepaint" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="xyz.gdome.fakepaint.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="xyz.gdome.fakepaint.model" />
+      <option name="MAIN_CLASS_NAME" value="xyz.gdome.fakepaint.model.ModelTest" />
+      <option name="METHOD_NAME" value="createNewShapeAddsNewShapeToToRenderList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.fakePaintApplication" />
+        <item itemvalue="Application.paintIsh" />
+        <item itemvalue="JUnit.ModelTest.assignShapeToRenderAddsNewShapeToToRenderList" />
+        <item itemvalue="JUnit.ModelTest.createNewShapeAddsNewShapeToToRenderList" />
       </list>
     </recent_temporary>
   </component>
@@ -89,6 +138,8 @@
       <workItem from="1666709782582" duration="17252000" />
       <workItem from="1666799645165" duration="22726000" />
       <workItem from="1666893772186" duration="115039000" />
+      <workItem from="1668460581329" duration="307000" />
+      <workItem from="1668460917859" duration="1919000" />
     </task>
     <task id="LOCAL-00001" summary="Added new classes for shape constructing logic.">
       <created>1666768595132</created>
@@ -153,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667747038020</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="NEW BRANCH: Version 2.0&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers with fields - Done: Color and Size&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone. Command pattern is not implemented..&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is re-rendered.&#10;&#10;6) Re-render when slider - value have changed. - Done&#10;&#10;7) output to file - Done">
+      <created>1668083109444</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1668083109444</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,7 +248,8 @@
     <MESSAGE value="Added even more functionality.&#10;TODO: &#10;1) bind controllers vid fields&#10;2) implement render from array - Done&#10;3) implement undo/redo&#10;4) implement selection mode&#10;5) look up how to automatically render when an array is changed&#10;6) look up how to automatically render when an object in the array have changed&#10;7) Selected shape" />
     <MESSAGE value="NEW BRANCH: Version 2.0&#10;&#10;Changed sout from Click to CLICK for on canvas action&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers vid fields - Color Done&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is rerendered.&#10;&#10;6) Rerender when slider - value have changed.&#10;&#10;7) output to file - Done 1/2, rest: add header and footer to output file" />
     <MESSAGE value="NEW BRANCH: Version 2.0&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers with fields - Done: Color and Size&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is re-rendered.&#10;&#10;6) Re-render when slider - value have changed.&#10;&#10;7) output to file - 1/2 Done, TODO: add header and footer to output file" />
-    <option name="LAST_COMMIT_MESSAGE" value="NEW BRANCH: Version 2.0&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers with fields - Done: Color and Size&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is re-rendered.&#10;&#10;6) Re-render when slider - value have changed.&#10;&#10;7) output to file - 1/2 Done, TODO: add header and footer to output file" />
+    <MESSAGE value="NEW BRANCH: Version 2.0&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers with fields - Done: Color and Size&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone. Command pattern is not implemented..&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is re-rendered.&#10;&#10;6) Re-render when slider - value have changed. - Done&#10;&#10;7) output to file - Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="NEW BRANCH: Version 2.0&#10;&#10;Added even more functionality.&#10;&#10;TODO: &#10;1) bind controllers with fields - Done: Color and Size&#10;&#10;2) implement render from array - Done&#10;&#10;3) implement undo/redo - Done in a buggy way, only drawing new shapes can be undone/redone. Command pattern is not implemented..&#10;&#10;4) implement selection mode - Done &#10;&#10;5) look up how to automatically render when an array is changed - Done in my own way. listener triggers the change to the selected object inside the toRender-list. After that the canvas is re-rendered.&#10;&#10;6) Re-render when slider - value have changed. - Done&#10;&#10;7) output to file - Done" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

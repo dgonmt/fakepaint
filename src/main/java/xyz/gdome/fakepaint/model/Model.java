@@ -227,7 +227,7 @@ public class Model {
 
     public Shape newShape() {
 
-         return shapeFactory.shapeBuilder(this.getType(), this.getObservableColor(), this.getSize(), this.getWidth(), this.getHeight(), this.getMouseX(), this.getMouseY());
+         return shapeFactory.shapeBuilder(this.getType(), this.getObservableColor(), this.getObservableSize(), this.getWidth(), this.getHeight(), this.getMouseX(), this.getMouseY());
 
 
     }

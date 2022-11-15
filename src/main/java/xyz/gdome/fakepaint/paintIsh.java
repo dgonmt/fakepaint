@@ -7,10 +7,10 @@ import xyz.gdome.fakepaint.controller.Controller;
 
 import java.io.IOException;
 
-public class fakePaintApplication extends javafx.application.Application {
+public class paintIsh extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(fakePaintApplication.class.getResource("view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(paintIsh.class.getResource("view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 812.5);
 
         Controller controller = fxmlLoader.getController();
