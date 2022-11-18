@@ -1,7 +1,5 @@
 package xyz.gdome.fakepaint.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -35,95 +33,46 @@ public class Controller {
     private ColorPicker colorPicker;
     @FXML
     private Slider sizeSlider;
-
-
-    Model model = new Model();
-    @FXML
-    private Canvas canvas;
     @FXML
     private GraphicsContext context;
+    @FXML
+    private Canvas canvas;
     private Stage stage;
+
+    Model model = new Model();
+
 
     @FXML
     private void initialize() {
 
         context = canvas.getGraphicsContext2D();
-//        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-//                model.setSize(sizeSlider.getValue());
-//            }
-//        });
         dimensionField.textProperty().bindBidirectional(model.dimensionProperty());
-
-
         colorPicker.valueProperty().bindBidirectional(model.colorProperty());
         sizeSlider.valueProperty().bindBidirectional(model.sizeProperty());
 
-
-//        colorPicker.valueProperty().addListener((observableValue, color, t1) -> {
-//            try {
-//                model.clearCanvas(canvas);
-//                model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
-//                model.render(context);
-//            } catch (Exception e) {
-//                System.out.println("Nothing to change");
-//            }
-//        });
-
-
-
-//        sizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-//                try {
-//                    model.clearCanvas(canvas);
-//                    model.getToRender().get(model.indexOfHighlightedShape).setSize(model.getObservableSize());
-//                    model.render(context);
-//                } catch (Exception e) {
-//                    System.out.println("Nothing to change");
-//                }
-//
-//            }
-//        });
-
-        //model.render(context);
     }
-
-
 
 
     @FXML
     private void onCanvasClicked(MouseEvent mouseEvent) {
-        if (mouseEvent.isControlDown()) {
 
-            System.out.println("CNTRL+Click");
+        if (mouseEvent.isControlDown()) {
 
             model.setMouseX(mouseEvent.getX());
             model.setMouseY(mouseEvent.getY());
             model.selector(mouseEvent.getX(), mouseEvent.getY());
+            model.updateServer();
 
-            System.out.println(model.indexOfHighlightedShape);
-
-//            System.out.println("Mouse X: " + mouseEvent.getX());
-//            System.out.println("Mouse Y: " + mouseEvent.getY());
 
 
         } else {
 
-            System.out.println("Click");
             model.setMouseX(mouseEvent.getX());
             model.setMouseY(mouseEvent.getY());
-
             model.setWidthAndHeightFromDimension(dimensionField.getText());
             model.assignShapeToRender(model.newShape());
             model.render(context);
-
-            System.out.println(model.indexOfHighlightedShape);
-
-            System.out.println("Mouse X: " + mouseEvent.getX());
-            System.out.println("Mouse Y: " + mouseEvent.getY());
-
+            model.updateServer();
 
 
         }
@@ -150,6 +99,7 @@ public class Controller {
         model.clearCanvas(canvas);
         model.render(context);
     }
+
     @FXML
     private void redo() {
         model.redo();
@@ -163,20 +113,24 @@ public class Controller {
                 model.clearCanvas(canvas);
                 model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
                 model.render(context);
+
             } catch (Exception e) {
-                System.out.println("Nothing to change");
+
             }
     }
+
     @FXML
     private void sizeValueChange() {
         try {
             model.clearCanvas(canvas);
             model.getToRender().get(model.indexOfHighlightedShape).setSize(model.getObservableSize());
             model.render(context);
+
         } catch (Exception e) {
-            System.out.println("Nothing to change");
+
         }
     }
+
     @FXML
     private void saveToFile(ActionEvent actionEvent) {
 
@@ -192,11 +146,10 @@ public class Controller {
             model.saveToSVG(filePath.toPath());
         }
     }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
-
 
 
 }

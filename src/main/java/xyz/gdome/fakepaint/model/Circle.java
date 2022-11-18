@@ -33,13 +33,10 @@ public class Circle implements Shape {
     public Color getColor() {
         return this.color;
     }
-    public Shape returnShape() {
-        return this;
-    }
 
     @Override
     public void toDisplay(GraphicsContext gc) {
-        System.out.println(this + " should appear on the canvas");
+
         gc.setFill(this.color);
         gc.fillOval(this.centerX - radius/2,this.centerY - radius/2,this.radius,this.radius);
         gc.setStroke(Color.BLACK);
@@ -49,9 +46,9 @@ public class Circle implements Shape {
 
     @Override
     public boolean isSelected(double x, double y) {
-        System.out.println("isSelected is checking a circle");
 
         return (Math.sqrt((((x - this.centerX) * (x - this.centerX)) + ((y - this.centerY) * (y - this.centerY)))) <= (this.radius / 2));
+
     }
     @Override
     public String toSvg() {
@@ -60,7 +57,6 @@ public class Circle implements Shape {
 
         return "<circle cx=\"" + this.centerX + "\" cy=\"" + this.centerY + "\" r=\"" + this.radius / 2  + "\" fill=\"" + color + "\"/>";
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -27,4 +27,26 @@ class ModelTest {
 
     }
 
+    @Test
+    void undoButtonDeletesAShapeFromRenderArray() {
+
+        Model model = new Model();
+
+        model.setMouseX(80);
+        model.setMouseY(80);
+        model.setObservableColor(Color.ANTIQUEWHITE);
+        model.setSize(40);
+        model.setType(ShapeType.CIRCLE);
+
+        model.assignShapeToRender(model.newShape());
+        model.undo();
+
+
+
+        assertEquals(0, model.getToRender().size());
+
+
+
+    }
+
 }

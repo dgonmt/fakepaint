@@ -15,10 +15,6 @@ public class DefaultShape implements Shape{
         return false;
     }
 
-    @Override
-    public Shape returnShape() {
-        return null;
-    }
 
     @Override
     public String toSvg() {

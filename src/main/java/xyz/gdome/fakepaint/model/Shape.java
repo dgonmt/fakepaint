@@ -15,7 +15,7 @@ public interface Shape {
 
     public String toSvg();
 
-    public Shape returnShape();
+
 
 
 }

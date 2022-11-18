@@ -22,9 +22,6 @@ public class Rectangle implements Shape{
 
     }
 
-    public Shape returnShape() {
-        return this;
-    }
 
     public void setColor(Color color) {
         this.color = color;
@@ -39,7 +36,7 @@ public class Rectangle implements Shape{
 
     @Override
     public void toDisplay(GraphicsContext gc) {
-        System.out.println(this + " should appear on the canvas");
+
         gc.setFill(this.color);
         gc.fillRect(this.centerX - width/2,this.centerY - height/2,this.width,this.height);
         gc.setStroke(Color.BLACK);
@@ -49,7 +46,7 @@ public class Rectangle implements Shape{
 
     @Override
     public boolean isSelected(double x, double y) {
-        System.out.println("isSelected is checking a rectangle");
+
         double westSide = centerX - (width/2);
         double lowerEdge = centerY - (height/2);
         double eastSide = centerX + (width/2);

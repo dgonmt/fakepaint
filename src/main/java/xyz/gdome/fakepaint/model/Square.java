@@ -19,10 +19,6 @@ public class Square implements Shape {
     }
 
 
-    public Shape returnShape() {
-        return this;
-    }
-
     public void setColor(Color color) {
         this.color = color;
     }
@@ -36,7 +32,7 @@ public class Square implements Shape {
 
     @Override
     public void toDisplay(GraphicsContext gc) {
-        System.out.println(this + " should appear on the canvas");
+
         gc.setFill(this.color);
         gc.fillRect(this.centerX - size / 2, this.centerY - size / 2, this.size, this.size);
         gc.setStroke(Color.BLACK);
@@ -46,15 +42,11 @@ public class Square implements Shape {
 
     @Override
     public boolean isSelected(double x, double y) {
-        System.out.println("isSelected is checking a square");
+
         double westSide = this.centerX - (this.size / 2);
         double lowerEdge = this.centerY - (this.size / 2);
         double eastSide = this.centerX + (this.size / 2);
         double upperEdge = this.centerY + (this.size / 2);
-
-        //System.out.println(westSide + " " + x + " " + eastSide);
-        //System.out.println(lowerEdge + " " + y + " " + upperEdge);
-        //System.out.println((westSide <= x && x <= eastSide) && (lowerEdge <= y && x <= upperEdge));
 
         return (westSide <= x && x <= eastSide) && (lowerEdge <= y && y <= upperEdge);
     }
