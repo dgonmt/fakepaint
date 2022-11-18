@@ -1,5 +1,6 @@
 package xyz.gdome.fakepaint.controller;
 
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import xyz.gdome.fakepaint.model.Model;
+import xyz.gdome.fakepaint.model.Shape;
 import xyz.gdome.fakepaint.model.ShapeType;
 
 import java.io.File;
@@ -50,6 +52,14 @@ public class Controller {
         colorPicker.valueProperty().bindBidirectional(model.colorProperty());
         sizeSlider.valueProperty().bindBidirectional(model.sizeProperty());
 
+
+
+
+
+        model.observableToRender.addListener((ListChangeListener<Shape>) c -> model.render(context));
+
+
+
     }
 
 
@@ -71,7 +81,7 @@ public class Controller {
             model.setMouseY(mouseEvent.getY());
             model.setWidthAndHeightFromDimension(dimensionField.getText());
             model.assignShapeToRender(model.newShape());
-            model.render(context);
+            //model.render(context);
             model.updateServer();
 
 
@@ -112,7 +122,8 @@ public class Controller {
             try {
                 model.clearCanvas(canvas);
                 model.getToRender().get(model.indexOfHighlightedShape).setColor(model.getObservableColor());
-                model.render(context);
+                //model.render(context);
+                model.updateServer();
 
             } catch (Exception e) {
 
@@ -124,7 +135,8 @@ public class Controller {
         try {
             model.clearCanvas(canvas);
             model.getToRender().get(model.indexOfHighlightedShape).setSize(model.getObservableSize());
-            model.render(context);
+            //model.render(context);
+            model.updateServer();
 
         } catch (Exception e) {
 
@@ -147,9 +159,16 @@ public class Controller {
         }
     }
 
+    @FXML
+    private void uploadToServer() {
+        model.runServer();
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+
 
 
 }

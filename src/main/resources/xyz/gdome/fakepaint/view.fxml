@@ -35,21 +35,30 @@
             </HBox>
             <VBox prefHeight="200.0" prefWidth="125.0">
                <children>
-                  <TextField fx:id="dimensionField" maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0" promptText="BxH">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="dimensionField" maxHeight="25.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" prefHeight="25.0" prefWidth="50.0" promptText="BxH">
+                           <HBox.margin>
+                              <Insets left="7.5" top="12.5" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="uploadBtn" onAction="#uploadToServer" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="U">
+                           <HBox.margin>
+                              <Insets left="7.5" top="12.5" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Slider fx:id="sizeSlider" blockIncrement="0.0" majorTickUnit="100.0" max="300.0" minorTickCount="10" onValueChange="#sizeValueChange">
                      <VBox.margin>
-                        <Insets left="7.25" right="7.25" top="12.5" />
-                     </VBox.margin>
-                  </TextField>
-                  <Slider fx:id="sizeSlider" onValueChange="#sizeValueChange" blockIncrement="0.0" majorTickUnit="100.0" max="300.0" minorTickCount="10" showTickLabels="true" showTickMarks="true">
-                     <VBox.margin>
-                        <Insets bottom="12.5" left="7.25" right="7.25" top="12.5" />
+                        <Insets bottom="25.0" left="7.25" right="7.25" />
                      </VBox.margin>
                   </Slider>
                </children>
             </VBox>
             <VBox>
                <children>
-                  <ColorPicker fx:id="colorPicker" onValueChange="#colorValueChange" maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="100.0">
+                  <ColorPicker fx:id="colorPicker" maxHeight="25.0" maxWidth="100.0" minHeight="25.0" minWidth="100.0" onValueChange="#colorValueChange" prefHeight="25.0" prefWidth="100.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="7.25" right="12.5" top="12.5" />
                      </VBox.margin>

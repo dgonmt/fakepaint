@@ -2,6 +2,8 @@ package xyz.gdome.fakepaint.model;
 
 import javafx.application.Platform;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -39,6 +41,16 @@ public class Model {
     private SimpleDoubleProperty observableSize;
     private SimpleStringProperty observableDimension;
 
+    public ObservableList<Shape> getObservableToRender() {
+        return observableToRender;
+    }
+
+    public void setObservableToRender(ObservableList<Shape> observableToRender) {
+        this.observableToRender = observableToRender;
+    }
+
+    public ObservableList<Shape> observableToRender = FXCollections.observableArrayList();
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GETTER/SETTER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public double getMouseX() {
@@ -62,7 +74,7 @@ public class Model {
     }
 
     public List<Shape> getToRender() {
-        return this.toRender;
+        return this.observableToRender;
     }
 
     public void setMouseX(double x) {
@@ -140,29 +152,9 @@ public class Model {
         observableDimension = new SimpleStringProperty("125x25");
 
 
-        try {
-            socket = new Socket("localhost", 8000);
-            OutputStream output = socket.getOutputStream();
-            writer = new PrintWriter(output, true);
-            InputStream input = socket.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(input));
-        } catch (IOException e) {
-            //throw new RuntimeException(e);
-            System.out.println("Ingen serveranslutning");
-        }
-
-        new Thread(() -> {
-            try {
-                while (true) {
-                    String line = reader.readLine();
-                    Platform.runLater(() -> assignShapeToRender(svgToShape(line)));
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
 
 
-        }).start();
+
 
 
     }
@@ -175,13 +167,13 @@ public class Model {
 
     private void highlight(Shape highlightedShape) {
         this.highlightedShape = highlightedShape;
-        indexOfHighlightedShape = toRender.size() - 1;
+        indexOfHighlightedShape = observableToRender.size() - 1;
     }
 
     public void assignShapeToRender(Shape shape) {
 
         if (!shape.getClass().getSimpleName().equals("DefaultShape")) {
-            this.toRender.add(shape);
+            this.observableToRender.add(shape);
             highlight(shape);
         }
 
@@ -189,9 +181,9 @@ public class Model {
 
     public void render(GraphicsContext gc) {
 
-        if (!toRender.isEmpty()) {
+        if (!observableToRender.isEmpty()) {
 
-            for (Shape shape : toRender) {
+            for (Shape shape : observableToRender) {
 
                 shape.toDisplay(gc);
 
@@ -200,15 +192,17 @@ public class Model {
         }
     }
 
-    private Shape svgToShape(String svgString) {
+    private void svgToShape(String svgString) {
 
         ShapeType type = ShapeType.DEFAULT;
         Color color = Color.BLACK;
         double width = 0.0;
         double height = 0.0;
-        double size = width;
+        double size = 0.0;
         double x = 0.0;
         double y = 0.0;
+
+        Shape constructedShape;
 
         String[] splitString = svgString.split(" ");
 
@@ -223,6 +217,7 @@ public class Model {
 
             if (width == height) {
                 type = ShapeType.SQUARE;
+                size = width;
             } else {
                 type = ShapeType.RECTANGLE;
             }
@@ -237,7 +232,11 @@ public class Model {
             type = ShapeType.CIRCLE;
         }
 
-        return shapeFactory.shapeBuilder(type, color, size, width, height, x, y);
+        constructedShape = shapeFactory.shapeBuilder(type, color, size, width, height, x, y);
+        System.out.println(constructedShape);
+
+        assignShapeToRender(constructedShape);
+
 
     }
 
@@ -248,12 +247,12 @@ public class Model {
 
         int tempIndex = 0;
 
-        if (!toRender.isEmpty()) {
+        if (!observableToRender.isEmpty()) {
 
-            for (int i = 0; i < toRender.size(); i++) {
-                if (toRender.get(i).isSelected(mouseClickX, mouseClickY)) {
+            for (int i = 0; i < observableToRender.size(); i++) {
+                if (observableToRender.get(i).isSelected(mouseClickX, mouseClickY)) {
 
-                    tempList.add(toRender.get(i));
+                    tempList.add(observableToRender.get(i));
                     tempIndex = i;
 
                 }
@@ -264,18 +263,20 @@ public class Model {
             }
         }
         indexOfHighlightedShape = tempIndex;
+
+        System.out.println(observableToRender.get(indexOfHighlightedShape));
     }
 
     public void undo() {
-        if (!toRender.isEmpty()) {
-            toStore.add(toRender.get(toRender.size() - 1));
-            toRender.remove(toRender.size() - 1);
+        if (!observableToRender.isEmpty()) {
+            toStore.add(observableToRender.get(observableToRender.size() - 1));
+            observableToRender.remove(observableToRender.size() - 1);
         }
     }
 
     public void redo() {
         if (!toStore.isEmpty()) {
-            toRender.add(toStore.get(toStore.size() - 1));
+            observableToRender.add(toStore.get(toStore.size() - 1));
             toStore.remove(toStore.size() - 1);
         }
     }
@@ -291,7 +292,7 @@ public class Model {
                 "     width=\"700\" height=\"475\"\n" +
                 "     xmlns=\"http://www.w3.org/2000/svg\">");
 
-        for (Shape shape : toRender) {
+        for (Shape shape : observableToRender) {
             outPut.append(shape.toSvg());
             outPut.append("\n");
         }
@@ -309,6 +310,34 @@ public class Model {
     public void updateServer() {
 
         writer.println(highlightedShape.toSvg());
+
+    }
+
+    public void runServer() {
+        try {
+            socket = new Socket("localhost", 8000);
+            OutputStream output = socket.getOutputStream();
+            writer = new PrintWriter(output, true);
+            InputStream input = socket.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(input));
+        } catch (IOException e) {
+            //throw new RuntimeException(e);
+            System.out.println("Ingen serveranslutning");
+        }
+
+        new Thread(() -> {
+            try {
+                while (true) {
+                    String line = reader.readLine();
+                    Platform.runLater(() -> svgToShape(line));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }).start();
+
 
     }
 
